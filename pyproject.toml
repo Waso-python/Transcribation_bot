@@ -1,0 +1,43 @@
+[project]
+name = "transcribation-server"
+version = "0.1.0"
+description = "ASR server for Russian audio transcription with FastAPI"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+  "gigaam @ git+https://github.com/salute-developers/GigaAM.git",
+  "faster-whisper>=1.1.0",
+  "transformers>=4.45.0",
+  "sentencepiece>=0.2.0",
+  "sqlalchemy>=2.0.30",
+  "aiosqlite>=0.20.0",
+  "alembic>=1.13.0",
+  "pydantic-settings>=2.3.0",
+  "redis>=5.0.0",
+  "huggingface-hub>=0.25.0,<1.0.0",
+  "pyannote.audio>=3.3.2,<4.0.0",
+  "torch>=2.5,<2.9",
+  "torchaudio>=2.5,<2.9",
+  "python-multipart>=0.0.9",
+  "aiogram>=3.22.0",
+  "pyrogram>=2.0.106",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2.0",
+  "httpx>=0.27.0",
+  "ruff>=0.5.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "ASYNC"]
