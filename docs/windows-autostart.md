@@ -66,6 +66,12 @@ cd C:\Users\waso\Transcribation_server
 By default this registers task for the current user (recommended for project in `C:\Users\...` and local `.venv`).
 Use `-AsSystem` only if project path and permissions are prepared for `SYSTEM`.
 
+**Служба отключается при выходе?** По умолчанию задача выполняется только при входе пользователя. Чтобы она работала после выхода/блокировки, перерегистрируйте с флагом `-RunWhenLoggedOff` (потребуется ввод пароля Windows):
+
+```powershell
+.\scripts\register_autostart_task.ps1 -RunWhenLoggedOff
+```
+
 Manual equivalent:
 
 ```powershell

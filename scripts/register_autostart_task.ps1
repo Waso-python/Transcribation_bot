@@ -1,5 +1,6 @@
 param(
-    [switch]$AsSystem
+    [switch]$AsSystem,
+    [switch]$RunWhenLoggedOff
 )
 
 $ErrorActionPreference = "Stop"
@@ -31,14 +32,20 @@ if ($AsSystem) {
 }
 else {
     $CurrentUser = "$env:USERDOMAIN\$env:USERNAME"
-    Register-ScheduledTask `
-        -TaskName $TaskName `
-        -Action $Action `
-        -Trigger $Trigger `
-        -User $CurrentUser `
-        -RunLevel Highest `
-        -Settings $Settings `
-        -Force | Out-Null
+    $params = @{
+        TaskName  = $TaskName
+        Action    = $Action
+        Trigger   = $Trigger
+        User      = $CurrentUser
+        RunLevel  = "Highest"
+        Settings  = $Settings
+        Force     = $true
+    }
+    if ($RunWhenLoggedOff) {
+        $cred = Get-Credential -UserName $CurrentUser -Message "Пароль Windows (чтобы служба работала после выхода из системы)"
+        $params["Password"] = $cred.GetNetworkCredential().Password
+    }
+    Register-ScheduledTask @params | Out-Null
 }
 
 Start-ScheduledTask -TaskName $TaskName
