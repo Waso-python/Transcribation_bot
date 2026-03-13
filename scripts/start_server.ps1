@@ -18,7 +18,7 @@ Set-Location $ProjectRoot
 Add-Content -Path $BootstrapLogFile -Value "$(Get-Date -Format s) starting uvicorn with $VenvPython"
 
 $ErrorActionPreference = "Continue"
-& $VenvPython -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --app-dir src 2>&1 |
+& $VenvPython -m uvicorn app.main:app --host 0.0.0.0 --port 8008 --app-dir src 2>&1 |
     ForEach-Object -MemberName ToString |
     Add-Content -Path $LogFile -Encoding UTF8
 $ExitCode = $LASTEXITCODE

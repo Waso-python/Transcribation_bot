@@ -17,7 +17,7 @@ FastAPI server for async audio transcription (RU-focused) with queue-based proce
 python -m pip install -e .[dev]
 copy .env.example .env  # Linux/macOS: cp .env.example .env
 python -m alembic upgrade head
-python -m uvicorn app.main:app --reload --app-dir src
+python -m uvicorn app.main:app --reload --port 8008 --app-dir src
 ```
 
 No Docker is required for the default setup.
@@ -61,7 +61,7 @@ Notes:
 
 ## API Quick Start
 ```bash
-curl -X POST "http://localhost:8000/v1/transcriptions" ^
+curl -X POST "http://localhost:8008/v1/transcriptions" ^
   -H "X-API-Key: dev-key" ^
   -F "file=@sample.wav"
 ```
@@ -103,7 +103,7 @@ TELEGRAM_AUTH_ANSWER=<secret_answer>
 ```
 2. Start API as usual:
 ```bash
-python -m uvicorn app.main:app --reload --app-dir src
+python -m uvicorn app.main:app --reload --port 8008 --app-dir src
 ```
 3. In Telegram:
 - `/start` -> answer auth question once

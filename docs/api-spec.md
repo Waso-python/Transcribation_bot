@@ -1,6 +1,6 @@
 # API Specification
 
-Base URL (local): `http://127.0.0.1:8000`
+Base URL (local): `http://127.0.0.1:8008`
 
 All `v1` endpoints require API key header:
 - Header: `X-API-Key: <key>`
@@ -59,7 +59,7 @@ Errors:
 
 Example:
 ```bash
-curl -X POST "http://127.0.0.1:8000/v1/transcriptions" \
+curl -X POST "http://127.0.0.1:8008/v1/transcriptions" \
   -H "X-API-Key: dev-key" \
   -F "file=@sample.wav"
 ```
